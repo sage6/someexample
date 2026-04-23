@@ -39,14 +39,14 @@ func MustAuth(handler http.Handler) http.Handler {
 // loginHandler handles the third-party login process.
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	segs := strings.Split(r.URL.Path, "/")
-	action := seg[2]
-	provider := seg[3]
+	action := segs[2]
+	provider := segs[3]
 	switch action {
 	case "login":
 
 		provider, err := gomniauth.Provider(provider)
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Error when trying to get provider %s: %s", privider, err), http.StatusBadRequest)
+			http.Error(w, fmt.Sprintf("Error when trying to get provider %s: %s", provider, err), http.StatusBadRequest)
 			return
 		}
 

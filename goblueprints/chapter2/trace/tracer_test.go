@@ -21,6 +21,6 @@ func TestNew(t *testing.T) {
 }
 
 func TestOff(t *testing.T) {
-	slientTracer := Off()
+	silentTracer := Off()
 	silentTracer.Trace("something")
 }

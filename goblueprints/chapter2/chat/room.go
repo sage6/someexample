@@ -48,7 +48,7 @@ func (r *room) run() {
 			// joining
 			r.clients[client] = true
 			r.tracer.Trace("New client joined")
-		case client := r.leave:
+		case client := <-r.leave:
 			//  leaving
 			delete(r.clients, client)
 			close(client.send)
@@ -69,7 +69,7 @@ const (
 	messageBufferSize = 25
 )
 
-var upgrader = &websocket.Upgrader{ReadBufferSize: socketBufferSize, WriteBuferSize: socketBufferSize}
+var upgrader = &websocket.Upgrader{ReadBufferSize: socketBufferSize, WriteBufferSize: socketBufferSize}
 
 func (r *room) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	socket, err := upgrader.Upgrade(w, req, nil)

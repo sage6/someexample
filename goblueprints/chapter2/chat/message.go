@@ -6,7 +6,7 @@ import (
 
 // message represent a singe message
 type message struct {
-	Name string
+	Name    string
 	Message string
-	When time.Time
+	When    time.Time
 }
